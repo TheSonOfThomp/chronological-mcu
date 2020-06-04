@@ -1,12 +1,16 @@
 const filmTitle = document.querySelector('#film-title')
 const playButton = document.querySelector('#play')
 const skipButton = document.querySelector('#skip')
+const stopButton = document.querySelector('#stop')
 
 playButton.addEventListener('click', () => {
   chrome.runtime.sendMessage({type: 'start'})
 })
 skipButton.addEventListener('click', () => {
   chrome.runtime.sendMessage({type: 'next'})
+})
+stopButton.addEventListener('click', () => {
+  chrome.runtime.sendMessage({type: 'stop'})
 })
 
 // window.onload = () => {
