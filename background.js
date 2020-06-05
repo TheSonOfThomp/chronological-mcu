@@ -1,3 +1,15 @@
+chrome.runtime.onInstalled.addListener(function () {
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
+    chrome.declarativeContent.onPageChanged.addRules([{
+      conditions: [new chrome.declarativeContent.PageStateMatcher({
+        pageUrl: { hostContains: 'disneyplus|netflix' },
+      })
+      ],
+      actions: [new chrome.declarativeContent.ShowPageAction()]
+    }]);
+  });
+});
+
 var currentIndex = -1
 var tabId;
 
@@ -13,6 +25,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendMessage({type: 'stop'}, tabId)
     currentIndex = -1
     tabId = null
+  } else if (request.type === 'popover') {
+    const sequenceData = currentIndex >= 0 ? sequence[currentIndex] : null
+    const film = sequenceData ? films[sequenceData["Film"]] || null : null
+    sendResponse({currentIndex, film, sequenceData})
   }
 })
 

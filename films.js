@@ -1,6 +1,7 @@
 const films = {
   THOR_DARK_WORLD: {
-    "Name": "THOR_DARK_WORLD",
+    "ID": "THOR_DARK_WORLD",
+    "Name": "Thor: The Dark World",
     "Length": "1:53:44",
     "Film start": "0:27",
     "Film end": "1:45:40",
@@ -12,7 +13,8 @@ const films = {
     "notes": ""
   },
   THOR_RAGNAROK: {
-    "Name": "THOR_RAGNAROK",
+    "ID": "THOR_RAGNAROK",
+    "Name": "Thor: Ragnarok",
     "Length": "2:11:41",
     "Film start": "0:39",
     "Film end": "2:00:35",
@@ -24,7 +26,8 @@ const films = {
     "notes": ""
   },
   THOR: {
-    "Name": "THOR",
+    "ID": "THOR",
+    "Name": "Thor",
     "Length": "1:56:10",
     "Film start": "0:37",
     "Film end": "1:45:13",
@@ -36,7 +39,8 @@ const films = {
     "notes": ""
   },
   BLACK_PANTHER: {
-    "Name": "BLACK_PANTHER",
+    "ID": "BLACK_PANTHER",
+    "Name": "Black Panther",
     "Length": "2:16:25",
     "Film start": "0:00",
     "Film end": "2:02:41",
@@ -48,7 +52,8 @@ const films = {
     "notes": ""
   },
   CAPTAIN_AMERICA_WINTER_SOLDIER: {
-    "Name": "CAPTAIN_AMERICA_WINTER_SOLDIER",
+    "ID": "CAPTAIN_AMERICA_WINTER_SOLDIER",
+    "Name": "Captain America : The Winter Soldier",
     "Length": "2:17:36",
     "Film start": "0:27",
     "Film end": "2:06:21",
@@ -60,7 +65,8 @@ const films = {
     "notes": ""
   },
   CAPTAIN_AMERICA_FIRST_AVENGER: {
-    "Name": "CAPTAIN_AMERICA_FIRST_AVENGER",
+    "ID": "CAPTAIN_AMERICA_FIRST_AVENGER",
+    "Name": "Captain America: The First Avenger",
     "Length": "2:05:50",
     "Film start": "0:33",
     "Film end": "1:53:45",
@@ -72,7 +78,8 @@ const films = {
     "notes": ""
   },
   GUARDIANS_2: {
-    "Name": "GUARDIANS_2",
+    "ID": "GUARDIANS_2",
+    "Name": "Guardians of the Galaxy Vol. 2",
     "Length": "2:17:22",
     "Film start": "0:34",
     "Film end": "2:07:53",
@@ -84,7 +91,8 @@ const films = {
     "notes": ""
   },
   ANT_MAN_WASP: {
-    "Name": "ANT_MAN_WASP",
+    "ID": "ANT_MAN_WASP",
+    "Name": "Ant Man and the Wasp",
     "Length": "1:58:25",
     "Film start": "0:00",
     "Film end": "1:46:59",
@@ -96,7 +104,8 @@ const films = {
     "notes": ""
   },
   GUARDIANS_1: {
-    "Name": "GUARDIANS_1",
+    "ID": "GUARDIANS_1",
+    "Name": "Guardians of the Galaxy",
     "Length": "2:02:21",
     "Film start": "0:00",
     "Film end": "1:53:15",
@@ -108,7 +117,8 @@ const films = {
     "notes": ""
   },
   ANT_MAN: {
-    "Name": "ANT_MAN",
+    "ID": "ANT_MAN",
+    "Name": "Ant Man",
     "Length": "1:58:29",
     "Film start": "0:00",
     "Film end": "1:47:42",
@@ -120,7 +130,8 @@ const films = {
     "notes": ""
   },
   CAPTAIN_MARVEL: {
-    "Name": "CAPTAIN_MARVEL",
+    "ID": "CAPTAIN_MARVEL",
+    "Name": "Captain Marvel",
     "Length": "2:05:38",
     "Film start": "0:38",
     "Film end": "1:52:47",
@@ -132,7 +143,8 @@ const films = {
     "notes": ""
   },
   AVENGERS_INFINITY_WAR: {
-    "Name": "AVENGERS_INFINITY_WAR",
+    "ID": "AVENGERS_INFINITY_WAR",
+    "Name": "Avengers: Infinity War",
     "Length": "2:29:45",
     "Film start": "0:25",
     "Film end": "2:17:24",
@@ -144,7 +156,8 @@ const films = {
     "notes": ""
   },
   CAPTAIN_AMERICA_CIVIL_WAR: {
-    "Name": "CAPTAIN_AMERICA_CIVIL_WAR",
+    "ID": "CAPTAIN_AMERICA_CIVIL_WAR",
+    "Name": "Captain America: Civil War",
     "Length": "2:29:12",
     "Film start": "0:00",
     "Film end": "2:16:44",
@@ -156,7 +169,8 @@ const films = {
     "notes": ""
   },
   IRON_MAN_3: {
-    "Name": "IRON_MAN_3",
+    "ID": "IRON_MAN_3",
+    "Name": "Iron Man 3",
     "Length": "2:11:48",
     "Film start": "0:00",
     "Film end": "1:59:36",
@@ -168,7 +182,8 @@ const films = {
     "notes": ""
   },
   INCREDIBLE_HULK: {
-    "Name": "INCREDIBLE_HULK",
+    "ID": "INCREDIBLE_HULK",
+    "Name": "The Incredible Hulk",
     "Length": "",
     "Film start": "",
     "Film end": "",
@@ -180,7 +195,8 @@ const films = {
     "notes": ""
   },
   IRON_MAN: {
-    "Name": "IRON_MAN",
+    "ID": "IRON_MAN",
+    "Name": "Iron Man",
     "Length": "2:06:46",
     "Film start": "0:33",
     "Film end": "1:57:16",
@@ -192,7 +208,8 @@ const films = {
     "notes": ""
   },
   IRON_MAN_2: {
-    "Name": "IRON_MAN_2",
+    "ID": "IRON_MAN_2",
+    "Name": "Iron Man 2",
     "Length": "2:04:59",
     "Film start": "0:33",
     "Film end": "1:56:58",
@@ -204,7 +221,8 @@ const films = {
     "notes": ""
   },
   AVENGERS: {
-    "Name": "AVENGERS",
+    "ID": "AVENGERS",
+    "Name": "The Avengers",
     "Length": "2:24:45",
     "Film start": "0:24",
     "Film end": "2:15:55",
@@ -216,7 +234,8 @@ const films = {
     "notes": ""
   },
   AVENGERS_ENDGAME: {
-    "Name": "AVENGERS_ENDGAME",
+    "ID": "AVENGERS_ENDGAME",
+    "Name": "Avengers: Endgame",
     "Length": "3:03:24",
     "Film start": "0:00",
     "Film end": "2:49:04",
@@ -228,7 +247,8 @@ const films = {
     "notes": ""
   },
   SPIDERMAN_HOMECOMING: {
-    "Name": "SPIDERMAN_HOMECOMING",
+    "ID": "SPIDERMAN_HOMECOMING",
+    "Name": "Spiderman: Homecoming",
     "Length": "2:13:33",
     "Film start": "0:43",
     "Film end": "2:02:54",
@@ -240,7 +260,8 @@ const films = {
     "notes": ""
   },
   AVENGERS_ULTRON: {
-    "Name": "AVENGERS_ULTRON",
+    "ID": "AVENGERS_ULTRON",
+    "Name": "Avengers: Age of Ultron",
     "Length": "2:22:57",
     "Film start": "0:28",
     "Film end": "2:11:06",
@@ -252,7 +273,8 @@ const films = {
     "notes": ""
   },
   DOCTOR_STRANGE: {
-    "Name": "DOCTOR_STRANGE",
+    "ID": "DOCTOR_STRANGE",
+    "Name": "Doctor Strange",
     "Length": "1:56:23",
     "Film start": "0:38",
     "Film end": "1:45:04",
@@ -264,7 +286,8 @@ const films = {
     "notes": ""
   },
   SPIDERMAN_FAR_FROM_HOME: {
-    "Name": "SPIDERMAN_FAR_FROM_HOME",
+    "ID": "SPIDERMAN_FAR_FROM_HOME",
+    "Name": "Spiderman: Far From Home",
     "Length": "2:09:37",
     "Film start": "0:45",
     "Film end": "1:55:45",
@@ -273,6 +296,6 @@ const films = {
     "Post-credits 2": "2:07:28",
     "Post credits 2 end": "2:09:06",
     "Link": "https://www.amazon.com/gp/video/detail/B07TKZQFJC/ref=atv_dp_sign_suc_3P",
-    "notes": "STARZ intro = 0:13"
+    "notes": "STARZ intro 0:13"
   }
 }
