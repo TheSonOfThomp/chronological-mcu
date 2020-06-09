@@ -16,11 +16,13 @@ var tabId;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('Background received message', request)
   if(request.type === 'start') {
-    currentIndex = 0
+    currentIndex = 7 // DEBUG
     goToFilm(currentIndex)
   } else if (request.type === 'next') {
     currentIndex += 1
     goToFilm(currentIndex)
+  } else if (request.type === 'back') {
+    sendMessage({ type: 'reset-clip', sequenceData: sequence[currentIndex], tabId , film}, tabId)
   } else if (request.type === 'stop') {
     sendMessage({type: 'stop'}, tabId)
     currentIndex = -1
@@ -28,7 +30,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.type === 'popover') {
     const sequenceData = currentIndex >= 0 ? sequence[currentIndex] : null
     const film = sequenceData ? films[sequenceData["Film"]] || null : null
-    sendResponse({currentIndex, film, sequenceData})
+    const nextClip = currentIndex >= 0 ? sequence[currentIndex + 1] : null
+    const next = nextClip ? films[nextClip["Film"]]["Name"] || null : null
+    sendResponse({currentIndex, film, sequenceData, next})
   }
 })
 

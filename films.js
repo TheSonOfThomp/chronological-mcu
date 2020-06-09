@@ -100,7 +100,7 @@ const films = {
     "Post-credits end": "1:51:01",
     "Post-credits 2": "1:57:31",
     "Post credits 2 end": "1:57:47",
-    "Link": "https://www.netflix.com/watch/80220813?trackId=13752289&tctx=0%2C0%2Cfc09ec977ca6afa8d5188803760df5f5753bea65%3A6630b7c2def008ffc2326bf0e5f1501c826fea09%2C%2C%2C",
+    "Link": "https://www.netflix.com/watch/80220813",
     "notes": ""
   },
   GUARDIANS_1: {
@@ -152,7 +152,7 @@ const films = {
     "Post-credits end": "2:29:03",
     "Post-credits 2": "",
     "Post credits 2 end": "",
-    "Link": "https://www.netflix.com/watch/80219127?trackId=13752289&tctx=0%2C0%2Cc3d5fb58-131a-42dc-a828-5543347d2bcc-543617318%2C%2C%2C",
+    "Link": "https://www.netflix.com/watch/80219127",
     "notes": ""
   },
   CAPTAIN_AMERICA_CIVIL_WAR: {
@@ -165,7 +165,7 @@ const films = {
     "Post-credits end": "2:19:56",
     "Post-credits 2": "2:26:28",
     "Post credits 2 end": "2:27:23",
-    "Link": "https://www.netflix.com/watch/80219127?trackId=13752289&tctx=0%2C0%2Cc3d5fb58-131a-42dc-a828-5543347d2bcc-543617318%2C%2C%2C",
+    "Link": "https://www.netflix.com/watch/80219127",
     "notes": ""
   },
   IRON_MAN_3: {
@@ -256,7 +256,7 @@ const films = {
     "Post-credits end": "2:06:00",
     "Post-credits 2": "2:12:29",
     "Post credits 2 end": "2:13:02",
-    "Link": "https://www.netflix.com/watch/80166369?trackId=13752289&tctx=0%2C0%2C27f5b259ce3619d56369f6c57de84a9aecf82cb3%3A2fc7148434849c7abeebc2eaacd1cceb53cfe531%2C%2C%2C",
+    "Link": "https://www.netflix.com/watch/80166369",
     "notes": ""
   },
   AVENGERS_ULTRON: {
@@ -295,7 +295,7 @@ const films = {
     "Post-credits end": "1:59:33",
     "Post-credits 2": "2:07:28",
     "Post credits 2 end": "2:09:06",
-    "Link": "https://www.amazon.com/gp/video/detail/B07TKZQFJC/ref=atv_dp_sign_suc_3P",
+    "Link": "https://www.amazon.com/gp/video/detail/B07TKZQFJC/",
     "notes": "STARZ intro 0:13"
   }
 }
