@@ -1,6 +1,6 @@
   {
     "name": "Chronological MCU",
-    "version": "0.1",
+    "version": "0.1.1",
     "description": "Play each MCU scene in chronological order",
     "manifest_version": 2,
     "permissions": [
@@ -8,6 +8,7 @@
       "activeTab",
       "tabs"
     ],
+    
     "background": {
       "scripts": [
         "films.js",
@@ -39,5 +40,10 @@
         "48": "images/chronMCU48.png",
         "128": "images/chronMCU128.png"
       }
+    },
+    "icons": {
+      "16": "images/chronMCU16.png",
+      "48": "images/chronMCU48.png",
+      "128": "images/chronMCU128.png"
     }
   }
