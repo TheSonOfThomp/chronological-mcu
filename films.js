@@ -165,7 +165,7 @@ const films = {
     "Post-credits end": "2:19:56",
     "Post-credits 2": "2:26:28",
     "Post credits 2 end": "2:27:23",
-    "Link": "https://www.netflix.com/watch/80219127",
+    "Link": "https://www.disneyplus.com/video/dc2f0aea-bac6-450d-bb3c-062309e4942d",
     "notes": ""
   },
   IRON_MAN_3: {
@@ -204,7 +204,7 @@ const films = {
     "Post-credits end": "2:05:43",
     "Post-credits 2": "",
     "Post credits 2 end": "",
-    "Link": "https://www.disneyplus.com/movies/marvel-studios-iron-man/6aM2a8mZATiu",
+    "Link": "https://www.disneyplus.com/video/8eaccf77-9e46-47f5-9b7a-fdc1e65cd1b4",
     "notes": ""
   },
   IRON_MAN_2: {

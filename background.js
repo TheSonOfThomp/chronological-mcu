@@ -10,16 +10,22 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
+const SKIP_FILMS = ["INCREDIBLE_HULK", "SPIDERMAN_FAR_FROM_HOME"]
 var currentIndex = -1
 var tabId;
+var incrementCurrentIndex = () => { currentIndex += 1 }
+// var incrementCurrentIndex = throttle(_incrementCurrentIndex, 500, {leading: true})
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('Background received message', request)
   if(request.type === 'start') {
-    currentIndex = 7 // DEBUG
+    currentIndex = 0 // DEBUG
     goToFilm(currentIndex)
   } else if (request.type === 'next') {
-    currentIndex += 1
+    incrementCurrentIndex()
+    if (SKIP_FILMS.includes(sequence[currentIndex]["Film"])) {
+      incrementCurrentIndex()
+    }
     goToFilm(currentIndex)
   } else if (request.type === 'back') {
     sendMessage({ type: 'reset-clip', sequenceData: sequence[currentIndex], tabId , film}, tabId)
@@ -53,34 +59,11 @@ function goToFilm(id) {
       }
     })
   })
-
-
-// if (tabId) {
-//   chrome.tabs.query({ active: true }, (tab) => {
-//     tabId = tab.id
-//     updateLink(tabId)
-//   })
-// } else {
-//   updateLink(tabId)
-// }
-
-// function updateLink(tab) {
-//   chrome.tabs.update(tab, {
-//     url: film["Link"]
-//   }, () => {
-//     chrome.tabs.onUpdated.addListener((updatedTabId) => {
-//       if (tab === updatedTabId) {
-//         // Send message to tab
-//         sendMessage({ type: 'redirected', film, sequenceDat }, tab)
-//       }
-//     })
-//   })
-// }
 }
 
 function sendMessage(payload, toTab) {
   if (toTab) {
-    console.log('Sending message to tab', toTab)
+    console.log('Sending message to tab', toTab, payload)
     chrome.tabs.sendMessage(toTab, payload);
   } else {
     console.log('Sending message')

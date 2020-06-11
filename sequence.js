@@ -135,9 +135,9 @@ const sequence = [
   {
     "Description": "Most of the prologue of IRON MAN 3 (start at 0:25, stop at 4:51)",
     "Film": "IRON_MAN_3",
-    "Start": "0:25",
+    "Start": "0:52",
     "Stop": "4:51",
-    "Clip length": "4:26"
+    "Clip length": "3:59"
   },
   {
     "Description": "Opening credits of THE INCREDIBLE HULK (stop at 3:03)",
