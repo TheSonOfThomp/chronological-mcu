@@ -3,6 +3,9 @@ var clipTimer = null;
 var videoListener = null;
 var netflix_isPlayingCallback = null;
 
+/**
+ * Start listening for messages from background.js
+ */
 chrome.runtime.onMessage.addListener((request) => {
   console.log('Content received message', request)
   if (request.type === "clip-data") {
@@ -17,10 +20,23 @@ chrome.runtime.onMessage.addListener((request) => {
   }
 });
 
-var onReceiveData = debounce(_onReceiveData, 100)
+/**
+ * When the window loads, tell background.js
+ */
+window.onload = () => {
+  chrome.runtime.sendMessage({ type: 'loaded' })
+}
+
+/**
+ * When we receive data abouit the clip from background
+ * we set the clip time.
+ * Debounce this method so we don't recurse indefinitely.
+ */
+var onReceiveData = debounce(_onReceiveData, 500)
 function _onReceiveData(clip, film, tabId) {
   clearTimeout(clipTimer)
   const video = document.querySelector('video')
+  // if the video element exists
   if (video) {
     console.log(video)
     if (film["Link"].includes('disneyplus')) {
@@ -29,15 +45,16 @@ function _onReceiveData(clip, film, tabId) {
       netflixSetClipTime(video, clip, film, tabId)
     }
   } else {
-    console.log('recursing onReceiveData')
+    // if the video element does not exist,
+    // call this method again until it does
     onReceiveData(clip, film, tabId)
   }
 }
 
-window.onload = () => {
-  chrome.runtime.sendMessage({ type: 'loaded' })
-}
-
+/**
+ * When the video loads set it's current time.
+ * Then set the timer for the clip
+ */
 function setClipTime(video, clip, film, tabId) {
   clearTimeout(clipTimer)
   videoListener = video.addEventListener('loadeddata', () => {
@@ -46,9 +63,13 @@ function setClipTime(video, clip, film, tabId) {
     console.log(`Set video time to`, video.currentTime, `seconds`)
     setEndTimer(toMillis(clip["Clip length"]), tabId)
   })
-
 }
 
+/**
+ * Netflox doesn't let us set video.currentTime
+ * Instead we have to spam the fastForward/rewind buttons
+ * until we get to the right time
+ */
 function netflixSetClipTime(video, clip, film, tabId) {
   console.log('NETFLIX')
   video.removeEventListener('playing', netflix_isPlayingCallback)
@@ -90,6 +111,10 @@ function netflixSetClipTime(video, clip, film, tabId) {
   video.addEventListener('playing', netflix_isPlayingCallback)
 }
 
+/**
+ * Set a timer for when the clip ends
+ * Tell background.js when we're ready to go to the next clip
+ */
 function setEndTimer(ms, tabId) {
   console.log(`Set timer for`, ms, `ms`)
   clipTimer = setTimeout(() => {
@@ -103,6 +128,9 @@ function setEndTimer(ms, tabId) {
   }, ms)
 }
 
+/**
+ * Converts hh:mm:ss to seconds
+ */
 function toSeconds(timestamp) {
   const t = timestamp.split(":")
   if(t.length === 2) {
@@ -112,6 +140,9 @@ function toSeconds(timestamp) {
   }
 }
 
+/**
+ * Converts hh:mm:ss to milliseconds
+ */
 function toMillis(timestamp) {
   return toSeconds(timestamp) * 1000
 }

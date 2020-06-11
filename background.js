@@ -16,6 +16,9 @@ var tabId;
 var incrementCurrentIndex = () => { currentIndex += 1 }
 // var incrementCurrentIndex = throttle(_incrementCurrentIndex, 500, {leading: true})
 
+/**
+ * Start listening for messages from content.js or popover.js
+ */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('Background received message', request)
 
