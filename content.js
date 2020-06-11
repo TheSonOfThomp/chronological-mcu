@@ -5,11 +5,11 @@ var netflix_isPlayingCallback = null;
 
 chrome.runtime.onMessage.addListener((request) => {
   console.log('Content received message', request)
-  if (request.type === "redirected") {
-    onRedirect(request.sequenceData, request.film, request.tabId)
+  if (request.type === "clip-data") {
+    onReceiveData(request.clip, request.film, request.tabId)
   } else if (request.type === 'reset-clip') {
     const video = document.querySelector('video')
-    setClipTime(video, request.sequenceData, request.film, request.tabId)
+    setClipTime(video, request.clip, request.film, request.tabId)
   } else if (request.type === 'stop') {
     const video = document.querySelector('video')
     video.pause()
@@ -17,36 +17,39 @@ chrome.runtime.onMessage.addListener((request) => {
   }
 });
 
-var onRedirect = debounce(_onRedirect, 100)
-
-function _onRedirect(sequenceData, film, tabId) {
+var onReceiveData = debounce(_onReceiveData, 100)
+function _onReceiveData(clip, film, tabId) {
   clearTimeout(clipTimer)
   const video = document.querySelector('video')
   if (video) {
     console.log(video)
     if (film["Link"].includes('disneyplus')) {
-      setClipTime(video, sequenceData, film, tabId)
+      setClipTime(video, clip, film, tabId)
     } else if (film["Link"].includes('netflix')) {
-      netflixSetClipTime(video, sequenceData, film, tabId)
+      netflixSetClipTime(video, clip, film, tabId)
     }
-
   } else {
-    onRedirect(sequenceData, film, tabId)
+    console.log('recursing onReceiveData')
+    onReceiveData(clip, film, tabId)
   }
 }
 
-function setClipTime(video, sequenceData, film, tabId) {
+window.onload = () => {
+  chrome.runtime.sendMessage({ type: 'loaded' })
+}
+
+function setClipTime(video, clip, film, tabId) {
   clearTimeout(clipTimer)
   videoListener = video.addEventListener('loadeddata', () => {
     console.log('Loaded video')
-    video.currentTime = toSeconds(sequenceData["Start"])
+    video.currentTime = toSeconds(clip["Start"])
     console.log(`Set video time to`, video.currentTime, `seconds`)
-    setEndTimer(toMillis(sequenceData["Clip length"]), tabId)
+    setEndTimer(toMillis(clip["Clip length"]), tabId)
   })
 
 }
 
-function netflixSetClipTime(video, sequenceData, film, tabId) {
+function netflixSetClipTime(video, clip, film, tabId) {
   console.log('NETFLIX')
   video.removeEventListener('playing', netflix_isPlayingCallback)
   const rwButton = $('.button-nfplayerBackTen')
@@ -64,7 +67,7 @@ function netflixSetClipTime(video, sequenceData, film, tabId) {
       rwButton.dispatchEvent(new MouseEvent('click'))
     }, 100)
 
-    const startTime = toSeconds(sequenceData["Start"])
+    const startTime = toSeconds(clip["Start"])
 
     video.pause()
     if (video.currentTime < startTime - 10) {
@@ -78,7 +81,7 @@ function netflixSetClipTime(video, sequenceData, film, tabId) {
       video.removeEventListener('playing', netflix_isPlayingCallback)
       video.play().then(() => {
         console.log(video.currentTime)
-        setEndTimer(toMillis(sequenceData["Clip length"]), tabId)
+        setEndTimer(toMillis(clip["Clip length"]), tabId)
       })
     }
   }

@@ -49,8 +49,8 @@ function updatePopover() {
       backButton.classList.remove('hidden')
       startButton.classList.add('hidden')
       filmTitle.innerText = response.film["Name"]
-      clipStart.innerText = response.sequenceData["Start"]
-      clipEnd.innerText = response.sequenceData["Stop"]
+      clipStart.innerText = response.clip["Start"]
+      clipEnd.innerText = response.clip["Stop"]
       skipButton.setAttribute('title', `Next: ${response.next}`)
     } else {
       clipData.classList.add('hidden')
