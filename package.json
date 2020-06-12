@@ -1,0 +1,28 @@
+{
+  "name": "chronological-mcu",
+  "version": "0.1.0",
+  "description": "Chronological MCU lets you play every scene in the Marvel Cinematic Universe in chronological order.",
+  "main": "src/manifest.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheSonOfThomp/chronological-mcu.git"
+  },
+  "keywords": [
+    "mcu",
+    "chronological",
+    "entertainment"
+  ],
+  "author": "Adam Thompson",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TheSonOfThomp/chronological-mcu/issues"
+  },
+  "homepage": "https://github.com/TheSonOfThomp/chronological-mcu#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-minify": "^3.1.0"
+  }
+}
