@@ -1,3 +1,4 @@
 *.sketch
 *.zip
 node_modules
+build/

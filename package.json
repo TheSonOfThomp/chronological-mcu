@@ -4,7 +4,7 @@
   "description": "Chronological MCU lets you play every scene in the Marvel Cinematic Universe in chronological order.",
   "main": "src/manifest.json",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
   "homepage": "https://github.com/TheSonOfThomp/chronological-mcu#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-minify": "^3.1.0"
+    "gulp-minify": "^3.1.0",
+    "gulp-zip": "^5.0.1",
+    "node-minify": "^3.6.0"
   }
 }
