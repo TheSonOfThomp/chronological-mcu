@@ -17,7 +17,7 @@ const copyManifest = () => src(['src/manifest.json']).pipe(dest('build/'))
 
 const copyImg = () => src(['src/images/**/*']).pipe(dest('build/images'))
 
-const zipBuild = () => src('build').pipe(zip('build.zip')).pipe(dest('./'))
+const zipBuild = () => src('build/*').pipe(zip('build.zip')).pipe(dest('./'))
 
 exports.default = series(
   parallel(
