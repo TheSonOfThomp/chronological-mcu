@@ -10,7 +10,7 @@
   <div id="clip-data" class="">
     <div class="title-section">
       <label class="data-description">Now playing</label>
-      <h1 id="film-title" class="data-point">Thor: The Dark World</h1>
+      <h1 id="film-title" class="data-point"></h1>
     </div>
     <div class="data-section">
       <label class="data-description">Start time</label>
@@ -18,18 +18,25 @@
         <span id="clip-start"></span>
       </div>
       <label class="data-description">End time</label>
-      <span id="clip-end" class="data-point">3:45</span>
+      <span id="clip-end" class="data-point"></span>
+    </div>
+    <div class="data-section">
+      <span id="clip-id">Clip</span>
     </div>
   </div>
 
   <div id="buttons">
-    <button id="start" title="Play"></button>
-    <button id="prev" class="hidden" title="Previous"></button>
-    <button id="back" class="hidden" title="Back"></button>
-    <button id="stop" class="hidden" title="Stop"></button>
-    <button id="skip" class="hidden" title="Next"></button>
+    <button id="start" class="text-button hidden" title="Start from beginning">Start</button>
+    <button id="resume" class="text-button hidden" title="Resume">Resume</button>
+    <button id="prev" class="icon-button hidden" title="Previous"></button>
+    <button id="back" class="icon-button hidden" title="Rewind"></button>
+    <button id="stop" class="icon-button hidden" title="Stop"></button>
+    <button id="skip" class="icon-button hidden" title="Next"></button>
   </div>
 
+  <div class="data-section">
+    <a class="link" href="https://github.com/TheSonOfThomp/chronological-mcu/issues">Report an issue</a>
+  </div>
 
   <script src="films.js"></script>
   <script src="sequence.js"></script>

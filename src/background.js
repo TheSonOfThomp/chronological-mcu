@@ -11,9 +11,23 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 const SKIP_FILMS = ["INCREDIBLE_HULK", "SPIDERMAN_FAR_FROM_HOME"]
+const LOCALSTORAGE_KEY = 'mcuIndex'
+var isPlaying = false
 var currentIndex = -1
 var tabId;
-var incrementCurrentIndex = () => { currentIndex += 1 }
+var incrementCurrentIndex = () => { 
+  currentIndex += 1
+  const { film } = getFilmClip(currentIndex)
+  if(film && film["Link"]) return
+  else incrementCurrentIndex()
+}
+var decrementCurrentIndex = () => { 
+  currentIndex -= 1
+  const { film } = getFilmClip(currentIndex)
+  if(film && film["Link"]) return
+  else decrementCurrentIndex()
+}
+var isIncluded = (film) => !SKIP_FILMS.includes(film["Name"])
 // var incrementCurrentIndex = throttle(_incrementCurrentIndex, 500, {leading: true})
 
 /**
@@ -24,36 +38,52 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if(request.type === 'start') {
     // Set the current index, and go to it's url
+    isPlaying = true;
     currentIndex = 0 
     goToFilm(currentIndex)
+
+  } else if (request.type === 'resume') {
+    isPlaying = true
+    console.log(localStorage)
+    currentIndex = localStorage[LOCALSTORAGE_KEY] || 0
+    goToFilm(currentIndex)
+
   } else if(request.type === 'loaded') {
     // content.js sends a message onload. 
     // When we get this message, send back the clip data
     console.log('Page loaded')
     sendClipData(currentIndex)
+
   } else if (request.type === 'next') {
     // When the client says it's time to move on
-    // we set the url to the next clip in the sequence
+    // we set the url to the next clip in the sequence.filter()
     incrementCurrentIndex()
-    if (SKIP_FILMS.includes(sequence[currentIndex]["Film"])) {
-      incrementCurrentIndex()
-    }
     goToFilm(currentIndex)
+
   } else if (request.type === 'back') {
-    // If the popover wants to restart, we send that on to the client
-    sendMessage({ type: 'reset-clip', sequenceData: sequence[currentIndex], tabId , film}, tabId)
+    // If the popover wants to restart the clip, we send that on to the client
+    const { film, clip } = getFilmClip(currentIndex)
+    sendMessage({ type: 'rewind', currentIndex, tabId, clip, film}, tabId)
+
+  } else if (request.type === 'previous') {
+    // When the user presses previous, go to the prev clip
+    decrementCurrentIndex()
+    goToFilm(currentIndex)
+
   } else if (request.type === 'stop') {
     // If the popover wants to stop, we sent that to the client
+    isPlaying = false
+    localStorage[LOCALSTORAGE_KEY] = currentIndex
     sendMessage({type: 'stop'}, tabId)
-    currentIndex = -1
     tabId = null
+
   } else if (request.type === 'popover') {
     // When the popover loads, 
     // sent it data about the current clip & film
     const { film, clip } = getFilmClip(currentIndex)
-    const nextClip = currentIndex >= 0 ? sequence[currentIndex + 1] : null
-    const next = nextClip ? films[nextClip["Film"]]["Name"] || null : null
-    sendResponse({ currentIndex, film, clip, next})
+    let next = getFilmClip(currentIndex + 1)
+    let prev = getFilmClip(currentIndex - 1)
+    sendResponse({ currentIndex, film, clip, isPlaying, next: next.film, prev: prev.film })
   }
 })
 
@@ -83,7 +113,7 @@ function sendClipData(index) {
  * Return the film and clip data for the current clip
  */
 function getFilmClip(index) {
-  const clip = index >= 0 ? sequence[index] : null
+  const clip = index >= 0 ? sequence.filter(isIncluded)[index] : null
   const film = clip ? films[clip["Film"]] || null : null
   return {film, clip}
 }

@@ -10,9 +10,11 @@ chrome.runtime.onMessage.addListener((request) => {
   console.log('Content received message', request)
   if (request.type === "clip-data") {
     onReceiveData(request.clip, request.film, request.tabId)
-  } else if (request.type === 'reset-clip') {
+
+  } else if (request.type === 'rewind') {
     const video = document.querySelector('video')
     setClipTime(video, request.clip, request.film, request.tabId)
+  
   } else if (request.type === 'stop') {
     const video = document.querySelector('video')
     video.pause()
@@ -40,7 +42,9 @@ function _onReceiveData(clip, film, tabId) {
   if (video) {
     console.log(video)
     if (film["Link"].includes('disneyplus')) {
-      setClipTime(video, clip, film, tabId)
+      videoListener = video.addEventListener('loadeddata', () => {
+        setClipTime(video, clip, film, tabId)
+      })
     } else if (film["Link"].includes('netflix')) {
       netflixSetClipTime(video, clip, film, tabId)
     }
@@ -57,12 +61,10 @@ function _onReceiveData(clip, film, tabId) {
  */
 function setClipTime(video, clip, film, tabId) {
   clearTimeout(clipTimer)
-  videoListener = video.addEventListener('loadeddata', () => {
-    console.log('Loaded video')
-    video.currentTime = toSeconds(clip["Start"])
-    console.log(`Set video time to`, video.currentTime, `seconds`)
-    setEndTimer(toMillis(clip["Clip length"]), tabId)
-  })
+  console.log('Loaded video')
+  video.currentTime = toSeconds(clip["Start"])
+  console.log(`Set video time to`, video.currentTime, `seconds`)
+  setEndTimer(toMillis(clip["Clip length"]), tabId)
 }
 
 /**
