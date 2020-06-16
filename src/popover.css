@@ -31,7 +31,7 @@ h1 {
 }
 .data-description {
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   opacity: 0.8;
 }
@@ -50,30 +50,54 @@ h1 {
 .data-section .data-point {
   grid-row: 2
 }
+
+#clip-id {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
 /* Buttons */
 #buttons {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: center;
   gap: 16px;
+  --button-size: 36px;
 }
 button {
-  min-width: 48px;
-  min-height: 48px;
-  color: white;
+  min-height: var(--button-size);
+  color: black;
   font-size: 1rem;
-  padding: 1rem;
   border: none;
   cursor: pointer;
-  outline-color: white;
+  outline-color: black; /* inverted */
   font-family: inherit;
   border-radius: 8px;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: 100%;
-  filter: invert(100%)
+  background-position: 0 50%;
+  background-size: var(--button-size);
+  filter: invert(100%);
 }
+
 button:hover {
   /* color ends up being white after filter */
   background-color: rgba(0,0,0,0.2);
+}
+
+.text-button {
+  padding: 0.25rem 0.5rem 0.25rem var(--button-size);
+}
+.icon-button {
+  min-width: var(--button-size);
+  padding: 0.5rem;
+  white-space: nowrap;
+}
+
+.link {
+  grid-column: 2;
+  font-size: 0.67rem;
+  opacity: 0.8;
+  color: white;
+  justify-self: right;
 }
