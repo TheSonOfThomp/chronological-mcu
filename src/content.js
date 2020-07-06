@@ -1,3 +1,4 @@
+const PING_DELAY = 1000;
 var $ = document.querySelector.bind(document)
 var clipTimer = null;
 var videoListener = null;
@@ -7,8 +8,9 @@ var netflix_isPlayingCallback = null;
  * Start listening for messages from background.js
  */
 chrome.runtime.onMessage.addListener((request) => {
-  console.log('Content received message', request)
+  if (request.type !== 'pong') console.log('Content received message', request)
   if (request.type === "clip-data") {
+    chrome.runtime.sendMessage({type: 'ping'})
     onReceiveData(request.clip, request.film, request.tabId)
 
   } else if (request.type === 'rewind') {
@@ -19,6 +21,10 @@ chrome.runtime.onMessage.addListener((request) => {
     const video = document.querySelector('video')
     video.pause()
     clearTimeout(clipTimer)
+  } else if (request.type === 'pong') {
+    setTimeout(() => {
+      chrome.runtime.sendMessage({type: 'ping'})
+    }, PING_DELAY);
   }
 });
 
@@ -27,6 +33,7 @@ chrome.runtime.onMessage.addListener((request) => {
  */
 window.onload = () => {
   chrome.runtime.sendMessage({ type: 'loaded' })
+  // commPort = chrome.runtime.connect(PORT_NAME)
 }
 
 /**

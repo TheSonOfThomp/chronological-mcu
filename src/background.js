@@ -12,6 +12,8 @@ chrome.runtime.onInstalled.addListener(function () {
 
 const SKIP_FILMS = ["INCREDIBLE_HULK", "SPIDERMAN_FAR_FROM_HOME"]
 const LOCALSTORAGE_KEY = 'mcuIndex'
+const PING_DELAY = 1000
+var pingTimer;
 var isPlaying = false
 var currentIndex = -1
 var tabId;
@@ -53,6 +55,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // When we get this message, send back the clip data
     console.log('Page loaded')
     sendClipData(currentIndex)
+    startPing()
 
   } else if (request.type === 'next') {
     // When the client says it's time to move on
@@ -84,6 +87,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let next = getFilmClip(currentIndex + 1)
     let prev = getFilmClip(currentIndex - 1)
     sendResponse({ currentIndex, film, clip, isPlaying, next: next.film, prev: prev.film })
+  } else if (request.type === 'ping') {
+    pingTimer = setTimeout(() => {
+      sendMessage({type: 'pong'}, tabId)
+      clearTimeout(pingTimer)
+    }, PING_DELAY);
   }
 })
 
@@ -97,7 +105,7 @@ function goToFilm(index) {
     url: film["Link"]
   }, (tab) => {
     tabId = tab.id
-    console.log('Updated url. Tab:', tabId)
+    // commPort = chrome.tabs.connect(tabId, { name: PORT_NAME})
   })
 }
 
@@ -123,10 +131,15 @@ function getFilmClip(index) {
  */
 function sendMessage(payload, toTab = null) {
   if (toTab) {
-    console.log('Sending message to tab', toTab, payload)
+    if (payload.type !== 'pong') console.log('Sending message to tab', toTab, payload)
     chrome.tabs.sendMessage(toTab, payload);
   } else {
     console.log('Sending message')
     chrome.runtime.sendMessage(payload)
   }
+}
+
+function startPing () {
+  clearTimeout(pingTimer)
+  sendMessage({ type: 'ping' }, tabId)
 }
