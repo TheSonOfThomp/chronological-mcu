@@ -100,7 +100,7 @@ const films = {
     "Post-credits end": "1:51:01",
     "Post-credits 2": "1:57:31",
     "Post credits 2 end": "1:57:47",
-    "Link": "https://www.netflix.com/watch/80220813",
+    "Link": "https://www.disneyplus.com/video/623d35ab-b438-4ba7-86c2-3a50f840737d",
     "notes": ""
   },
   GUARDIANS_1: {
@@ -152,7 +152,7 @@ const films = {
     "Post-credits end": "2:29:03",
     "Post-credits 2": "",
     "Post credits 2 end": "",
-    "Link": "https://www.netflix.com/watch/80219127",
+    "Link": "https://www.disneyplus.com/video/4da34214-4803-4c80-8e66-b9b4b46e1bf8",
     "notes": ""
   },
   CAPTAIN_AMERICA_CIVIL_WAR: {
